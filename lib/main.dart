@@ -138,12 +138,23 @@ class AS extends State<A> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    q.correct.name,
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        q.correct.name,
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      )
+                    ]..addAll(q.correct.wow == null
+                        ? []
+                        : IconButton(
+                            icon: Image.asset(
+                              'assets/y.png',
+                              width: 44,
+                            ),
+                            onPressed: () => launch(q.correct.wow),
+                          )),
                   ),
                   sz,
                   Text(q.correct.desc),
@@ -171,16 +182,19 @@ class W {
     this.name,
     this.desc,
     this.link,
+    this.wow,
   });
 
   final String name;
   final String desc;
   final String link;
+  final String wow;
 
   W.fromJson(Map<String, dynamic> j)
       : name = j['name'],
         desc = j['description'],
-        link = j['link'];
+        link = j['link'],
+        wow = j['wowUrl'];
 }
 
 class Q {
